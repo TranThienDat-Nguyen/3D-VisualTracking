@@ -90,13 +90,11 @@ Linh Ma (linh.mavan@gm.gist.ac.kr), Machine Learning & Vision Laboratory, GIST, 
 If you find this project useful in your research, please consider citing by:
 
 ```
-@misc{linh2024inffus,
+@artcile{linh2024inffus,
       title={Track Initialization and Re-Identification for {3D} Multi-View Multi-Object Tracking}, 
       author={Linh Van Ma, Tran Thien Dat Nguyen, Ba-Ngu Vo, Hyunsung Jang, Moongu Jeon},
-      year={2024},
-      eprint={2405.18606},
-      archivePrefix={arXiv},
-      primaryClass={cs.CV}
+      journal={Information Fusion},
+      year={2024}
 }
 ```
 
