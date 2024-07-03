@@ -15,8 +15,8 @@ def dataset_eval(dataset, adaptive_birth, use_feat, exp_idx="", root_dir="./resu
     model_params = model(dataset)
     meas, img_dirs = load_detection(model_params, dataset)
     glmb = GLMB(model_params, adaptive_birth, use_feat)
-    glmb.run(model_params, dataset, meas)
-    # glmb.runcpp(model_params, dataset, meas, adaptive_birth, use_feat)
+    # glmb.run(model_params, dataset, meas)
+    glmb.runcpp(model_params, dataset, meas, adaptive_birth, use_feat)
     glmb.save_est_motformat(root_dir, dataset + str(exp_idx) + "_" + str(adaptive_birth) + "_" + str(use_feat))
 
 
