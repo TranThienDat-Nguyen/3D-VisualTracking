@@ -1,6 +1,6 @@
 # MV-GLMB-AB (Multiview GLMB-Adaptive Birth)
 
-This is the C++ implementation for the paper:
+This is the C++ implementation (with Python wrapper) for the paper:
 ```
 @artcile{linh2024inffus,
       title={Track Initialization and Re-Identification for {3D} Multi-View Multi-Object Tracking}, 
@@ -13,8 +13,9 @@ A pre-print version of the article is available at http://arxiv.org/abs/2405.186
 
 ### Quick Overview
 The algorithm estimates 3D tracks from 2D bounding box detection.
-
-![](assets/overview.png)
+<div align="center">
+	<img src="assets/overview.png">
+</div>
 
 ### System Installation (require Docker)
 Download the Docker image at [Docker Hub](https://hub.docker.com/r/isplcurtin/mv-glmb-ab).
