@@ -1,6 +1,6 @@
 # MV-GLMB-AB (Multiview GLMB-Adaptive Birth)
 
-This is the Python and C++ implementation for the paper:
+This is the C++ implementation for the paper:
 ```
 @artcile{linh2024inffus,
       title={Track Initialization and Re-Identification for {3D} Multi-View Multi-Object Tracking}, 
