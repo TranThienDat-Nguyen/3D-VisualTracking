@@ -33,26 +33,10 @@ Download the Docker image at [Docker Hub](https://hub.docker.com/r/isplcurtin/mv
 The docker also supports running codes via [browser](http://localhost:8888) with login password `abc123`. 
 
 ### Preparing Data
- - Datasets: 
+ - Download the datasets: 
     - CMC datasets (CMC1, CMC2, CMC3, CMC4, CMC5) can be download from [MEGA CLOUD, NZ](https://mega.nz/file/LKxAyZiT#wa-aMQmgk9guNkjj1olaPeUf-LgPS5P9iYBmZSLFnp8).
     - WILDTRACK dataset is available  [EPFL CVLAB](https://www.epfl.ch/labs/cvlab/data/data-wildtrack/).
-    - For your convenience, I have uploaded these datasets to my own google drive. From the docker image bash command:
-    ```bash
-    docker exec -it 3D-VisualTracking bash
-    mkdir -p /workspace/data/images
-    cd /workspace/data/images
-    # Download CMC
-    gdown https://drive.google.com/uc?id=1diGmm6PBIZtbSS-SVliPHemRWBPFSRo- 
-    unzip CMC.zip 
-    rm CMC.zip
-    # Download Wildtrack
-    gdown https://drive.google.com/uc?id=1djvpBgWkgZENV20vVeWothg99Dm90M29
-    7z x Wildtrack_dataset_full.zip -Y # need to use 7zip instead of unzip. 
-    mv Wildtrack_dataset WILDTRACK
-    rm Wildtrack_dataset_full.zip
-    chmod -R 777 $(pwd) # change file ownership to everyone
-    ```
-- Folder structure:
+- Place the downloaded data into the following folder structure
     ```
     |-- source code
     |   |-- data
@@ -99,7 +83,7 @@ The docker also supports running codes via [browser](http://localhost:8888) with
 ![Video Demo for CMC4 dataset](assets/cmc4_demo.gif)
 
 ### Writing Your Own Tracking Algorithm
-- To be updated
+- To be updated.
 
 ### Acknowledgement
 The source codes are published by Linh Ma (linh.mavan@gm.gist.ac.kr), Machine Learning & Vision Laboratory, GIST, South Korea.
