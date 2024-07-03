@@ -94,7 +94,7 @@ The docker also supports running codes via [browser](http://localhost:8888) with
 - Navigate to 'ms-glmb-ukf'.
 - Modify parameters in the demo.py  file.
 - Run 'python demo.py'.
-- 
+
 ### Sample Outputs
 ![Video Demo for CMC4 dataset](assets/cmc4_demo.gif)
 
@@ -104,7 +104,7 @@ The docker also supports running codes via [browser](http://localhost:8888) with
 ### Acknowledgement
 The source codes are published by Linh Ma (linh.mavan@gm.gist.ac.kr), Machine Learning & Vision Laboratory, GIST, South Korea.
 
-The OSPA(2) metric used for evaluation is described at:
+The OSPA(2) metric used for evaluation is described in the paper:
 ```
 @article{rezatofighi2020trustworthy,
   title={How trustworthy are the existing performance evaluations for basic vision tasks?},
