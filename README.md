@@ -75,9 +75,9 @@ The docker also supports running codes via [browser](http://localhost:8888) with
 - Run `python setup.py build develop`.
 
 ### Running Default Tracking Algorithm (MV-GLMB-AB)
-- Navigate to 'ms-glmb-ukf'.
-- Modify parameters in the demo.py  file.
-- Run 'python demo.py'.
+- Navigate to `ms-glmb-ukf`.
+- Modify parameters in the `demo.py`  file.
+- Run `python demo.py`.
 
 ### Sample Outputs
 ![Video Demo for CMC4 dataset](assets/cmc4_demo.gif)
