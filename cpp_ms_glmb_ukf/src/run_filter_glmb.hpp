@@ -1189,14 +1189,14 @@ public:
         clean_update(kt);
 
         VectorXd rangetmp = VectorXd::LinSpaced(glmb_update_cdn.size(), 0, glmb_update_cdn.size() - 1);
-        // cout << "Time " << kt << " #eap cdn=" << rangetmp.transpose() * glmb_update_cdn;
+        cout << "Time " << kt << " #eap cdn=" << rangetmp.transpose() * glmb_update_cdn;
         int temp1 = ((VectorXd) rangetmp.array().pow(2)).transpose() * glmb_update_cdn;
         int temp2 = (rangetmp.transpose() * glmb_update_cdn);
-        // cout << " #var cdn=" << temp1 - temp2 * temp2;
-        // cout << " #comp pred=" << H_posterior;
-        // cout << " #comp post=" << H_posterior;
-        // cout << " #comp updt=" << H_cap;
-        // cout << " #trax updt=" << glmb_update_tt.size() << endl;
+        cout << " #var cdn=" << temp1 - temp2 * temp2;
+        cout << " #comp pred=" << H_posterior;
+        cout << " #comp post=" << H_posterior;
+        cout << " #comp updt=" << H_cap;
+        cout << " #trax updt=" << glmb_update_tt.size() << endl;
 
         // state estimation and display diagnostics
         return extract_estimates(mModel);
