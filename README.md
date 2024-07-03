@@ -67,7 +67,7 @@ The docker also supports running codes via [browser](http://localhost:8888) with
 - Update the folders containing detection files, for example, `../detection/fairmot/` in `gen_meas.py`.
     - FairMOT 2D image detector (output bounding boxes and re-identification feature) https://github.com/ifzhang/FairMOT
     - CSTrack 2D image detector (output bounding boxes and re-identification feature) [https://github.com/JudasDie/SOTS](https://github.com/JudasDie/SOTS/blob/MOT/CSTrack/lib/tutorial/CSTrack/cstrack.md)
-    - We can use pre-trained weights from FairMOT and CSTrack but to improve the accuracy of our 3D tracking algorithm on CMC and WILDTRACK datasets, 2D image detectors need to be re-train on the CMC4 dataset (see [gen_labels_cmc.py](detection/fairmot/cmc/gen_labels_cmc.py)).
+    - We can use pre-trained weights from FairMOT and CSTrack but to improve the accuracy of our 3D tracking algorithm on CMC and WILDTRACK datasets, 2D image detectors need to be re-train on the CMC4 dataset (use [gen_labels_cmc.py](detection/fairmot/cmc/gen_labels_cmc.py) to obtain the training data).
 - Update image files for visualization `../data/images/` in `gen_meas.py`.
 - Prepare ground truth data `gt_data_dir="../data/images/"` for performance evaluation using `CLEAR MOT` in `clearmot.py` and `OSPA2` in `ospa2.py`.
 
