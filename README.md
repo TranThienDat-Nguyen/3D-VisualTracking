@@ -16,7 +16,7 @@ The algorithm estimates 3D tracks from 2D bounding box detection.
 
 ![](assets/overview.png)
 
-### System Installation (require Docker on your computer)
+### System Installation (require Docker)
 Download the Docker image at [Docker Hub](https://hub.docker.com/r/isplcurtin/mv-glmb-ab).
 - Clone this repository:
     ```sh
@@ -86,11 +86,11 @@ The docker also supports running codes via [browser](http://localhost:8888) with
 - Update image files for visualization `../data/images/` in `gen_meas.py`.
 - Prepare ground truth data `gt_data_dir="../data/images/"` for performance evaluation using `CLEAR MOT` in `clearmot.py` and `OSPA2` in `ospa2.py`.
 
-### Compiling default tracking algorithm
+### Compiling Default Tracking Algorithm (MV-GLMB-AB)
 - Navigate to `cpp_ms_glmb_ukf` folder.
 - Run `python setup.py build develop`.
 
-### Running the default algorithm
+### Running Default Tracking Algorithm (MV-GLMB-AB)
 - Navigate to 'ms-glmb-ukf'.
 - Modify parameters in the demo.py  file.
 - Run 'python demo.py'.
@@ -98,7 +98,7 @@ The docker also supports running codes via [browser](http://localhost:8888) with
 ### Sample Outputs
 ![Video Demo for CMC4 dataset](assets/cmc4_demo.gif)
 
-### Compiling your tracking algorithm
+### Writing Your Own Tracking Algorithm
 - To be updated
 
 ### Acknowledgement
