@@ -249,7 +249,8 @@ public:
             centerXY(1) = clusters[i].getCentroidByPos(1);
             meanXY[i] = centerXY;
         }
-        return {point_cluster_idxs, meanXY};
+        // return {point_cluster_idxs, meanXY};
+        return std::make_tuple(point_cluster_idxs, meanXY);
     }
 };
 

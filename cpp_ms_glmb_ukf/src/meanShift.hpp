@@ -360,7 +360,8 @@ shared(points, sensorsPoints, dimensions, builder, bandwidth, radius, doubledSqu
         birthSols[i] = clusters[i].getMeasurementIndices();
         centroids[i] = clusters[i].getCentroid().getValues();
     }
-    return {birthSols, centroids};
+    // return {birthSols, centroids};
+    return std::make_tuple(birthSols, centroids);
 }
 
 #endif //MEANSHIFT_MEANSHIFTADAPTIVEBIRTH_H

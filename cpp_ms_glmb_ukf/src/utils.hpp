@@ -1,4 +1,5 @@
 #include <Eigen/SparseCore>
+#include <vector>
 
 using namespace std;
 
@@ -158,4 +159,36 @@ Eigen::VectorXd bbox_giou_ltlwh(Eigen::VectorXd box, Eigen::MatrixXd query_boxes
         }
     }
     return overlaps;
+}
+
+std::vector<double> esf(const std::vector<double>& Z) {
+    if (Z.empty()) {
+        return {1}; // If Z is empty, return 1
+    }
+
+    size_t n_z = Z.size();
+    std::vector<std::vector<double>> F(2, std::vector<double>(n_z + 1, 0));
+
+    size_t i_n = 0;
+    size_t i_nminus = 1;
+
+    for (size_t n = 1; n <= n_z; ++n) {
+        F[i_n][1] = F[i_nminus][1] + Z[n - 1];
+        for (size_t k = 2; k <= n; ++k) {
+            if (k == n) {
+                F[i_n][k] = Z[n - 1] * F[i_nminus][k - 1];
+            } else {
+                F[i_n][k] = F[i_nminus][k] + Z[n - 1] * F[i_nminus][k - 1];
+            }
+        }
+        std::swap(i_n, i_nminus); // Swap i_n and i_nminus
+    }
+
+    std::vector<double> s;
+    s.push_back(1); // The first element is always 1
+    for (size_t i = 1; i <= n_z; ++i) {
+        s.push_back(F[i_nminus][i]); // Append the rest of the elements
+    }
+
+    return s;
 }

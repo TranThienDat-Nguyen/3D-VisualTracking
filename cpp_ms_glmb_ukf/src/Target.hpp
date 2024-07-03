@@ -29,7 +29,8 @@ tuple<MatrixXd, VectorXd> ut(VectorXd m, MatrixXd P, double alpha, double kappa)
     W = 0.5 * W;
     W(0) = lambda_;
     W = W / (n_x + lambda_);
-    return {X, W};
+    // return {X, W};
+    return std::make_tuple(X, W);
 }
 
 MatrixXd gen_msobservation_fn(MatrixXd cam_mat, MatrixXd X, MatrixXd W, Vector2d imagesize) {
@@ -150,7 +151,8 @@ ukf_update_per_sensor(VectorXd z, VectorXd m, MatrixXd P, int s, int mode, Model
     bool ch2 = m(2) > model.YMAX(0) && m(2) < model.YMAX(1);
     bool ch3 = m(4) > model.ZMAX(0) && m(4) < model.ZMAX(1);
     if (!(ch1 && ch2 && ch3)) {
-        return {log(std::nexttoward(0.0, 1.0L)), m, P};  // qz_temp
+        // return {log(std::nexttoward(0.0, 1.0L)), m, P};  // qz_temp
+        return std::make_tuple(log(std::nexttoward(0.0, 1.0L)), m, P);  // qz_temp
     }
     VectorXd mtemp = VectorXd::Zero(model.x_dim + model.z_dim);
     mtemp(seq(0, model.x_dim - 1)) = m;
@@ -182,13 +184,15 @@ ukf_update_per_sensor(VectorXd z, VectorXd m, MatrixXd P, int s, int mode, Model
     VectorXd m_temp = m + K * z_eta;
     MatrixXd P_temp = P - G * iS * G.transpose();
 
-    return {qz_temp, m_temp, P_temp};
-}
+    // return {qz_temp, m_temp, P_temp};}
+    return std::make_tuple(qz_temp, m_temp, P_temp); }
+                      
 
 tuple<VectorXd, MatrixXd, vector<MatrixXd>> cleanup(VectorXd w, MatrixXd m, vector<MatrixXd> P,
                                                     double elim_th = 1e-5, double merge_th = 4, int l_max = 10) {
     if (w.size() <= 1) {
-        return {w, m, P};
+        // return {w, m, P};
+        return std::make_tuple(w, m, P);
     }
     VectorXd w_temp(w.size());
     MatrixXd m_temp(m.rows(), m.cols());
@@ -274,7 +278,8 @@ tuple<VectorXd, MatrixXd, vector<MatrixXd>> cleanup(VectorXd w, MatrixXd m, vect
         P_temp.resize(sIndex);
         P = vector<MatrixXd>(P_temp);
     }
-    return {w.array().log(), m, P};
+    // return {w.array().log(), m, P};
+    return std::make_tuple(w.array().log(), m, P);
 }
 
 VectorXd norm_feat01(VectorXd x) {
@@ -589,7 +594,8 @@ public:
                 tt.mFeat.row(s) = norm_feat01(feat_temp);
             }
         }
-        return {log_sum_exp(for_cost) + pm_temp, tt};
+        // return {log_sum_exp(for_cost) + pm_temp, tt};
+        return std::make_tuple(log_sum_exp(for_cost) + pm_temp, tt);
     }
 
     void gating_feet(vector<MatrixXd> Zz, double gating_threshold = 0.8) {  // Euclid distance

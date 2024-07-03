@@ -16,6 +16,10 @@ public:
     double P_G;  // gate size in percentage
     double gamma;  // inv chi^2 dn gamma value
     double gate_flag;  // gating on or off 1/0
+    // additional parameters for LMB
+    double tt_prune ; 
+    int tt_cap ;
+
 
     // UKF parameters
     double ukf_alpha;
@@ -23,7 +27,8 @@ public:
     double ukf_kappa;
 
     Filter() {
-        H_upd = 20000;  // requested number of updated components/hypotheses
+        // H_upd = 20000;  // requested number of updated components/hypotheses
+        H_upd = 5000;
         H_max = 8000; // cap on number of posterior components/hypotheses
         hyp_threshold = log(1e-5);  // pruning threshold for components/hypotheses
 

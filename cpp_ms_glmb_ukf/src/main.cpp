@@ -8,7 +8,7 @@
 #include "gibbs_multisensor.hpp"
 #include "gm_adaptive_birth.hpp"
 #include "mc_adaptive_birth.hpp"
-#include "run_filter.hpp"
+#include "run_filter_glmb.hpp"
 #include "meanShift.hpp"
 #include "kmeans.hpp"
 

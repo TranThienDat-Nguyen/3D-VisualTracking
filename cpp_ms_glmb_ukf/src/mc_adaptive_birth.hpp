@@ -125,7 +125,8 @@ tuple<VectorXd, MatrixXd> proposalParameter(const MatrixXd &modelR, MatrixXd cam
     Matrix2d H_J = jacobian_z2x(z(seq(0, 1)), T);
     MatrixXd cov = H_J * modelR * H_J.transpose(); // eq (31)
     Vector2d mu = z2x(z(seq(0, 1)), T);
-    return {mu, cov};
+    // return {mu, cov};
+    return std::make_tuple(mu, cov);
 }
 
 class MCAdaptiveBirth { // Monte Carlo Approximation
@@ -173,7 +174,8 @@ private:
         double percen_v = pow(percen, 2);
         double std_dev = sqrt(log(percen_v + 1));
         double mean = -pow(std_dev, 2) / 2;
-        return {mean, std_dev};
+        // return {mean, std_dev};
+        return std::make_tuple(mean, std_dev);
     }
 
 public:
@@ -366,7 +368,8 @@ public:
         int total_num_meas = preProcessMeasurements(meas_rU, Z, pMu, pCov, num_meas, meas_flag, log_meas_rU);
         // Skip if there is no measurement
         if (total_num_meas == 0) {
-            return {vector<VectorXd>(0), vector<double>(0), vector<vector<int>>(0)};
+            // return {vector<VectorXd>(0), vector<double>(0), vector<vector<int>>(0)};
+            return std::make_tuple(vector<VectorXd>(0), vector<double>(0), vector<vector<int>>(0));
         }
 
         /* (II). Gibbs sampling */
@@ -553,7 +556,8 @@ public:
             }
         }
 
-        return {sols_m, sols_r, sols_birth};
+        // return {sols_m, sols_r, sols_birth};
+        return std::make_tuple(sols_m, sols_r, sols_birth);
     }
 
     tuple<vector<vector<int>>, vector<vector<float>>> sample_mc_sols(vector<VectorXd> meas_rU, vector<MatrixXd> Z) {
@@ -568,7 +572,8 @@ public:
         int total_num_meas = preProcessMeasurements(meas_rU, Z, pMu, pCov, num_meas, meas_flag, log_meas_rU);
         // Skip if there is no measurement
         if (total_num_meas == 0) {
-            return {vector<vector<int>>(0), vector<vector<float>>(0)};
+            // return {vector<vector<int>>(0), vector<vector<float>>(0)};
+            return std::make_tuple(vector<vector<int>>(0), vector<vector<float>>(0));
         }
 
         /* (II). Gibbs sampling */
@@ -666,7 +671,8 @@ public:
             }
             centers[i] = center;
         }
-        return {assignments, centers};
+        // return {assignments, centers};
+        return std::make_tuple(assignments, centers);
     }
 };
 

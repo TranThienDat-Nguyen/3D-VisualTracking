@@ -70,7 +70,8 @@ private:
         U << 1.0, 0., 0.,
                 0., 1., 0.,
                 0., 0., 1.;
-        return {H, U};
+        // return {H, U};
+        return std::make_tuple(H, U);
     }
 
     double log_sum_exp(VectorXd arr) {
@@ -369,7 +370,8 @@ public:
         VectorXd r_b = log_r_b(seq(0, bidx - 1));
         r_b = (r_b.array() - log_sum_exp(r_b)).array().exp();
         r_b = (r_b.array() < m_r_bmax).select(r_b, m_r_bmax).array() + std::nexttoward(0.0, 1.0L); // r_bmax = 0.01
-        return {m_birth(all, seq(0, bidx - 1)), P_birth, r_b};
+        // return {m_birth(all, seq(0, bidx - 1)), P_birth, r_b};
+        return std::make_tuple(m_birth(all, seq(0, bidx - 1)), P_birth, r_b);
     }
 };
 
