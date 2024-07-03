@@ -9,7 +9,7 @@ This is the Python and C++ implementation for the paper:
       year={2024}
 }
 ```
-A pre-print version of the article is available at arXiv 2405.18606](http://arxiv.org/abs/2405.18606.
+A pre-print version of the article is available at http://arxiv.org/abs/2405.18606.
 
 ### Quick Overview
 The algorithm estimates 3D tracks from 2D bounding box detection.
@@ -101,11 +101,9 @@ The docker also supports running codes via [browser](http://localhost:8888) with
 ### Compiling your tracking algorithm
 - To be updated
 
-
-
-
 ### Acknowledgement
 The source codes are published by Linh Ma (linh.mavan@gm.gist.ac.kr), Machine Learning & Vision Laboratory, GIST, South Korea.
+
 The OSPA(2) metric used for evaluation is described at:
 ```
 @article{rezatofighi2020trustworthy,
