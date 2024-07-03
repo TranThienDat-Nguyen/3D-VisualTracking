@@ -27,8 +27,7 @@ public:
     double ukf_kappa;
 
     Filter() {
-        // H_upd = 20000;  // requested number of updated components/hypotheses
-        H_upd = 5000;
+        H_upd = 20000;  // requested number of updated components/hypotheses
         H_max = 8000; // cap on number of posterior components/hypotheses
         hyp_threshold = log(1e-5);  // pruning threshold for components/hypotheses
 
