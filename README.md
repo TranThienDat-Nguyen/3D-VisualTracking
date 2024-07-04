@@ -12,7 +12,7 @@ This is the C++ implementation (with Python wrapper) for the paper:
 A pre-print version of the article is available at http://arxiv.org/abs/2405.18606.
 
 ### Quick Overview
-The algorithm estimates 3D tracks from 2D bounding box detection.
+The algorithm estimates 3D tracks (3D SHAPES + 3D POSITION) from 2D bounding box detection.
 <div align="center">
 	<img src="assets/overview.png">
 </div>
