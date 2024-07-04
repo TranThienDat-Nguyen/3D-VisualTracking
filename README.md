@@ -66,13 +66,14 @@ The docker also supports running codes via [browser](http://localhost:8888) with
     |   |-- ms_glmb_ukf
     |   |-- README.md
     ```
-- Update the folders containing detection files, for example, `../detection/fairmot/` in `gen_meas.py`.
-    - FairMOT 2D image detector (output bounding boxes and re-identification feature) https://github.com/ifzhang/FairMOT
-    - CSTrack 2D image detector (output bounding boxes and re-identification feature) [https://github.com/JudasDie/SOTS](https://github.com/JudasDie/SOTS/blob/MOT/CSTrack/lib/tutorial/CSTrack/cstrack.md)
-    - We can use pre-trained weights from FairMOT and CSTrack but to improve the accuracy of our 3D tracking algorithm on CMC and WILDTRACK datasets, 2D image detectors need to be re-train on the CMC4 dataset (use [gen_labels_cmc.py](detection/fairmot/cmc/gen_labels_cmc.py) to obtain the training data).
-- Update image files for visualization `../data/images/` in `gen_meas.py`.
-- Prepare ground truth data `gt_data_dir="../data/images/"` for performance evaluation using `CLEAR MOT` in `clearmot.py` and `OSPA2` in `ospa2.py`.
-
+### Default 2D Detection
+- We provide two sets of 2D detections (for all cameras) for all datasets.
+- -FairMOT (https://github.com/ifzhang/FairMOT) detection is available at `../detection/fairmot/`.
+- -CSTrack ([https://github.com/JudasDie/SOTS](https://github.com/JudasDie/SOTS/blob/MOT/CSTrack/lib/tutorial/CSTrack/cstrack.md)) detection is available at `../detection/cstrack/`.
+- Note:
+- -We re-trained the original models with CMC4 sequence (use [gen_labels_cmc.py](detection/fairmot/cmc/gen_labels_cmc.py) to obtain the training data).
+### Using Your Own 2D Detection 
+- To be updated
 ### Compiling Default Tracking Algorithm (MV-GLMB-AB)
 - Navigate to `cpp_ms_glmb_ukf` folder.
 - Run `python setup.py build develop`.
