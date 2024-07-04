@@ -72,8 +72,9 @@ The docker also supports running codes via [browser](http://localhost:8888) with
 	- CSTrack ([https://github.com/JudasDie/SOTS](https://github.com/JudasDie/SOTS/blob/MOT/CSTrack/lib/tutorial/CSTrack/cstrack.md)) detection is available at `../detection/cstrack/`.
 - Note:
 	- We re-trained the original models with CMC4 sequence (use [gen_labels_cmc.py](detection/fairmot/cmc/gen_labels_cmc.py) to obtain the training data).
-### Using Your Own 2D Detection 
+### Using Your 2D Detection 
 - To be updated
+  
 ### Compiling Default Tracking Algorithm (MV-GLMB-AB)
 - Navigate to `cpp_ms_glmb_ukf` folder.
 - Run `python setup.py build develop`.
@@ -83,10 +84,10 @@ The docker also supports running codes via [browser](http://localhost:8888) with
 - Modify parameters in the `demo.py`  file, follow the options available there.
 - Run `python demo.py`.
 
-### Sample Outputs
+### Sample Outputs from MV-GLMB-AB Algorithm
 ![Video Demo for CMC4 dataset](assets/cmc4_demo.gif)
 
-### Writing Your Own Tracking Algorithm
+### Writing Your Tracking Algorithm
 - To be updated.
 
 ### Acknowledgement
