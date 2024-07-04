@@ -2,11 +2,13 @@
 
 This is the C++ implementation (with Python wrapper) for the paper:
 ```
-@artcile{linh2024inffus,
+@article{linh2024inffus,
       title={Track Initialization and Re-Identification for {3D} Multi-View Multi-Object Tracking}, 
-      author={Linh Van Ma, Tran Thien Dat Nguyen, Ba-Ngu Vo, Hyunsung Jang, Moongu Jeon},
+      author={Linh Van Ma and Tran Thien Dat Nguyen and Ba-Ngu Vo and Hyunsung Jang and Moongu Jeon},
       journal={Information Fusion},
-      year={2024}
+      year={2024},
+      pages={102496},
+      publisher={Elsevier}
 }
 ```
 A pre-print version of the article is available at http://arxiv.org/abs/2405.18606.
@@ -95,7 +97,10 @@ The OSPA(2) metric used for evaluation is described in the paper:
   title={How trustworthy are the existing performance evaluations for basic vision tasks?},
   author={Tran Thien Dat Nguyen and Hamid Rezatofighi and Ba-Ngu Vo and Ba-Tuong Vo and Silvio Savarese and Ian Reid},
   journal={IEEE Transactions on Pattern Analysis and Machine Intelligence},
-  year={2022}
+  year={2023},
+  volume={45},
+  number={7},
+  pages={8538-8552}
 }
 ```
 
