@@ -68,10 +68,10 @@ The docker also supports running codes via [browser](http://localhost:8888) with
     ```
 ### Default 2D Detection
 - We provide two sets of 2D detections (for all cameras) for all datasets.
-- -FairMOT (https://github.com/ifzhang/FairMOT) detection is available at `../detection/fairmot/`.
-- -CSTrack ([https://github.com/JudasDie/SOTS](https://github.com/JudasDie/SOTS/blob/MOT/CSTrack/lib/tutorial/CSTrack/cstrack.md)) detection is available at `../detection/cstrack/`.
+	- FairMOT (https://github.com/ifzhang/FairMOT) detection is available at `../detection/fairmot/`.
+	- CSTrack ([https://github.com/JudasDie/SOTS](https://github.com/JudasDie/SOTS/blob/MOT/CSTrack/lib/tutorial/CSTrack/cstrack.md)) detection is available at `../detection/cstrack/`.
 - Note:
-- -We re-trained the original models with CMC4 sequence (use [gen_labels_cmc.py](detection/fairmot/cmc/gen_labels_cmc.py) to obtain the training data).
+	- We re-trained the original models with CMC4 sequence (use [gen_labels_cmc.py](detection/fairmot/cmc/gen_labels_cmc.py) to obtain the training data).
 ### Using Your Own 2D Detection 
 - To be updated
 ### Compiling Default Tracking Algorithm (MV-GLMB-AB)
@@ -80,7 +80,7 @@ The docker also supports running codes via [browser](http://localhost:8888) with
 
 ### Running Default Tracking Algorithm (MV-GLMB-AB)
 - Navigate to `ms-glmb-ukf` folder.
-- Modify parameters in the `demo.py`  file, see options available there.
+- Modify parameters in the `demo.py`  file, follow the options available there.
 - Run `python demo.py`.
 
 ### Sample Outputs
