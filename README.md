@@ -13,7 +13,7 @@ This is the C++ implementation (with Python wrapper) for the paper:
 ```
 A pre-print version of the article is available at http://arxiv.org/abs/2405.18606.
 
-The original source codes are published at https://github.com/linh-gist/3D-Visual-MOT.
+The original source codes are published at https://github.com/linh-gist/3D-Visual-MOT by Linh Ma (linh.mavan@gm.gist.ac.kr), Machine Learning & Vision Laboratory, GIST, South Korea.
 
 ### Quick Overview
 The algorithm estimates 3D tracks (3D SHAPES + 3D POSITION) from 2D bounding box detection.
