@@ -1,4 +1,4 @@
-# MV-GLMB-AB (Multiview GLMB-Adaptive Birth)
+# 3D Visual Tracking with 2D Bounding Box Detection
 
 This is the C++ implementation (with Python wrapper) for the paper:
 ```
@@ -77,7 +77,7 @@ The docker also supports running codes via [browser](http://localhost:8888) with
 ### Using Your 2D Detection 
 - To be updated
   
-### Compiling Default Tracking Algorithm (MV-GLMB-AB)
+### Compiling Default Tracking Algorithm - Multiview GLMB-Adaptive Birth (MV-GLMB-AB)
 - Navigate to `cpp_ms_glmb_ukf` folder.
 - Run `python setup.py build develop`.
 
