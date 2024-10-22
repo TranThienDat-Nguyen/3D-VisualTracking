@@ -92,7 +92,9 @@ The docker also supports running codes via [browser](http://localhost:8888) with
 ### Writing Your Tracking Algorithm
 - To be updated.
 
-### ![#f03c15]News!!!`#f03c15`
+### !!!News!!!
+- GLMB Filter for 2D Visual Tracking is released [here](https://github.com/linh-gist/VisualRFS).
+- Standard GLMB/LMB filters are released [here](https://github.com/linh-gist/labeledRFS).
 
 ### Acknowledgement
 The source codes are published by Linh Ma (linh.mavan@gm.gist.ac.kr), Machine Learning & Vision Laboratory, GIST, South Korea.
