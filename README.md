@@ -15,6 +15,11 @@ A pre-print version of the article is available at http://arxiv.org/abs/2405.186
 
 The original source codes are published at https://github.com/linh-gist/3D-Visual-MOT by Linh Ma (linh.mavan@gm.gist.ac.kr), Machine Learning & Vision Laboratory, GIST, South Korea.
 
+### !!! News !!!
+22/10/2024:
+- Python & C++ implementations of GLMB Filter for 2D Visual Tracking is released [here](https://github.com/linh-gist/VisualRFS).
+- Python implementation of GLMB and LMB filters (including the multi-sensor GLMB filter) are released [here](https://github.com/linh-gist/labeledRFS).
+
 ### Quick Overview
 The algorithm estimates 3D tracks (3D SHAPES + 3D POSITION) from 2D bounding box detection.
 <div align="center">
@@ -91,10 +96,6 @@ The docker also supports running codes via [browser](http://localhost:8888) with
 
 ### Writing Your Tracking Algorithm
 - To be updated.
-
-### !!!News!!!
-- GLMB Filter for 2D Visual Tracking is released [here](https://github.com/linh-gist/VisualRFS).
-- Standard GLMB/LMB filters are released [here](https://github.com/linh-gist/labeledRFS).
 
 ### Acknowledgement
 The source codes are published by Linh Ma (linh.mavan@gm.gist.ac.kr), Machine Learning & Vision Laboratory, GIST, South Korea.
