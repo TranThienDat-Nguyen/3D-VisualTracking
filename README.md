@@ -16,12 +16,15 @@ A pre-print version of the article is available at http://arxiv.org/abs/2405.186
 The original source codes are published at https://github.com/linh-gist/3D-Visual-MOT by Linh Ma (linh.mavan@gm.gist.ac.kr), Machine Learning & Vision Laboratory, GIST, South Korea.
 
 ### !!! News !!!
+19/12/2024:
+- C++ implementation of (the faster) LMB filter is released, check it out [here](https://github.com/TranThienDat-Nguyen/3D-VisualTracking/blob/main/cpp_ms_glmb_ukf/src/run_filter_lmb.hpp)!!!
+ 
 22/10/2024:
-- Python & C++ implementations of GLMB Filter for 2D Visual Tracking is released [here](https://github.com/linh-gist/VisualRFS).
-- Python implementation of GLMB and LMB filters (including the multi-sensor GLMB filter) are released [here](https://github.com/linh-gist/labeledRFS).
+- Python & C++ implementations of GLMB Filter for 2D Visual Tracking is released [here](https://github.com/linh-gist/VisualRFS)!!!
+- Python implementation of GLMB and LMB filters (including the multi-sensor GLMB filter) are released [here](https://github.com/linh-gist/labeledRFS)!!!
 
 ### Quick Overview
-The algorithm estimates 3D tracks (3D SHAPES + 3D POSITION) from 2D bounding box detection.
+The algorithms estimate 3D tracks (3D SHAPES + 3D POSITION) from 2D bounding box detection.
 <div align="center">
 	<img src="assets/overview.png">
 </div>
@@ -82,11 +85,12 @@ The docker also supports running codes via [browser](http://localhost:8888) with
 ### Using Your 2D Detection 
 - To be updated
   
-### Compiling Default Tracking Algorithm - Multiview GLMB-Adaptive Birth (MV-GLMB-AB)
+### Compiling Tracking Algorithm
 - Navigate to `cpp_ms_glmb_ukf` folder.
+- Chane line 11 in "main.cpp" to: ```#include "run_filter_glmb.hpp"``` for MV-GLMB-AB filer or to ```#include "run_filter_lmb.hpp"``` for the LMB filter.
 - Run `python setup.py build develop`.
 
-### Running Default Tracking Algorithm (MV-GLMB-AB)
+### Start Tracking 3D Objects
 - Navigate to `ms-glmb-ukf` folder.
 - Modify parameters in the `demo.py`  file, follow the options available there.
 - Run `python demo.py`.
