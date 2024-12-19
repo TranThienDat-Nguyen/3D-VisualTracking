@@ -47,8 +47,9 @@ The docker also supports running codes via [browser](http://localhost:8888) with
 
 ### Preparing Data
  - Download the datasets: 
-    - CMC datasets (CMC1, CMC2, CMC3, CMC4, CMC5) can be downloaded from [MEGA CLOUD, NZ](https://mega.nz/file/LKxAyZiT#wa-aMQmgk9guNkjj1olaPeUf-LgPS5P9iYBmZSLFnp8).
-    - WILDTRACK dataset is available  [EPFL CVLAB](https://www.epfl.ch/labs/cvlab/data/data-wildtrack/).
+    - CMC datasets (CMC1, CMC2, CMC3, CMC4, CMC5) can be downloaded from [Google Drive](https://drive.google.com/file/d/1eliDg_DTHqgW10ww7aQWvicAwP3hlVEo/view?usp=sharing or [MEGA CLOUD, NZ](https://mega.nz/file/LKxAyZiT#wa-aMQmgk9guNkjj1olaPeUf-LgPS5P9iYBmZSLFnp8).
+    - WILDTRACK dataset is available at [EPFL CVLAB](https://www.epfl.ch/labs/cvlab/data/data-wildtrack/).
+    - Download data [here](https://drive.google.com/file/d/1VYC6iOFyN2WAoA0JB0dzXbIlYPabC34t/view?usp=sharing).
 - Create a `data` folder and place the downloaded data in there using the following structure
     ```
     |-- source code
