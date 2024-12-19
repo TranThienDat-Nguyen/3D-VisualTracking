@@ -15,18 +15,20 @@
 - pybind11 `git submodule add https://github.com/pybind/pybind11.git`
 - EigenRand `git submodule add https://github.com/bab2min/EigenRand.git`
 - Linear Assignment Problem solver `https://github.com/gatagat/lap.git`
-### Install
+  
+### Install Our Tracking Package
+Chane line 11 in "main.cpp" to: ```#include "run_filter_glmb.hpp"``` for MV-GLMB-AB filer or to ```#include "run_filter_lmb.hpp"``` for the LMB filter.
 
-`python setup.py build develop`
+Run `python setup.py build develop`
 
-Install Eigen for Windows (after the following steps, add include directory `C:\eigen-3.4.0` for example.)
+### Install Eigen for Windows (after the following steps, add include directory `C:\eigen-3.4.0` for example.)
 1) Download Eigen 3.4.0 (NOT lower than this version) from it official website https://eigen.tuxfamily.org/ or [ZIP file here](https://gitlab.com/libeigen/eigen/-/archive/3.4.0/eigen-3.4.0.zip).
 2) `mkdir build_dir`
 3) `cd build_dir`
 4) `cmake ../`
 5) `make install`, this step does not require
 
-Install Eigen for Linux
+### Install Eigen for Linux
 1) [install and use eigen3 on ubuntu 16.04](https://kezunlin.me/post/d97b21ee/) 
 2) `sudo apt-get install libeigen3-dev` libeigen3-dev is installed install to `/usr/include/eigen3/` and `/usr/lib/cmake/eigen3`.
 3) Thus, we must make a change in **CMakeLists.txt** `SET( EIGEN3_INCLUDE_DIR "/usr/local/include/eigen3" )` to `SET( EIGEN3_INCLUDE_DIR "/usr/include/eigen3/" )`.
