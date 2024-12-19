@@ -1,4 +1,4 @@
-## C++ Implementation for MV-GLMB-AB
+## C++ Implementations for MV-GLMB-AB and LMB filters
 - The following functions are implemented in C++ and can be called from Python:
     - `gibbs_multisensor_approx_dprobsample`
     - `MCAdaptiveBirth`, Monte Carlo Adaptive Birth implementation for paper "Multi-sensor Joint Adaptive Birth Sampler for Labeled Random Finite Set Tracking".
