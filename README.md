@@ -17,11 +17,11 @@ The original source codes are published at https://github.com/linh-gist/3D-Visua
 
 ### !!! News !!!
 19/12/2024:
-- C++ implementation of (the faster) LMB filter is released, check it out [here](https://github.com/TranThienDat-Nguyen/3D-VisualTracking/blob/main/cpp_ms_glmb_ukf/src/run_filter_lmb.hpp)!!!
+- C++ implementation of (the faster) LMB filter is released, check it out [here](https://github.com/TranThienDat-Nguyen/3D-VisualTracking/blob/main/cpp_ms_glmb_ukf/src/run_filter_lmb.hpp) !!!
  
 22/10/2024:
-- Python & C++ implementations of GLMB Filter for 2D Visual Tracking is released [here](https://github.com/linh-gist/VisualRFS)!!!
-- Python implementation of GLMB and LMB filters (including the multi-sensor GLMB filter) are released [here](https://github.com/linh-gist/labeledRFS)!!!
+- Python & C++ implementations of GLMB Filter for 2D Visual Tracking is released [here](https://github.com/linh-gist/VisualRFS) !!!
+- Python implementation of GLMB and LMB filters (including the multi-sensor GLMB filter) are released [here](https://github.com/linh-gist/labeledRFS) !!!
 
 ### Quick Overview
 The algorithms estimate 3D tracks (3D SHAPES + 3D POSITION) from 2D bounding box detection.
