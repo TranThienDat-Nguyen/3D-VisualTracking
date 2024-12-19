@@ -90,7 +90,7 @@ The docker also supports running codes via [browser](http://localhost:8888) with
 - Chane line 11 in "main.cpp" to: ```#include "run_filter_glmb.hpp"``` for MV-GLMB-AB filer or to ```#include "run_filter_lmb.hpp"``` for the LMB filter.
 - Run `python setup.py build develop`.
 
-### Start Tracking 3D Objects
+### Start Tracking Objects in 3D
 - Navigate to `ms-glmb-ukf` folder.
 - Modify parameters in the `demo.py`  file, follow the options available there.
 - Run `python demo.py`.
