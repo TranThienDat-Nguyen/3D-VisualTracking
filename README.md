@@ -87,7 +87,7 @@ The docker also supports running codes via [browser](http://localhost:8888) with
   
 ### Compiling Tracking Algorithm
 - Navigate to `cpp_ms_glmb_ukf` folder.
-- Chane line 11 in "main.cpp" to: ```#include "run_filter_glmb.hpp"``` for MV-GLMB-AB filer or to ```#include "run_filter_lmb.hpp"``` for the LMB filter.
+- Change line 11 in "main.cpp" to: ```#include "run_filter_glmb.hpp"``` for MV-GLMB-AB filer or to ```#include "run_filter_lmb.hpp"``` for the LMB filter.
 - Run `python setup.py build develop`.
 
 ### Start Tracking Objects in 3D
