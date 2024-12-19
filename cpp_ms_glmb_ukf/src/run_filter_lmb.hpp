@@ -282,7 +282,8 @@ private:
             avps(tabidx) = glmb_predict_tt[tabidx].mR;
         }
         for (int tabidx = tt_birth.size(); tabidx < cpreds; tabidx++) {
-            avps(tabidx) = glmb_predict_tt[tabidx].computePS(k);
+            // avps(tabidx) = glmb_predict_tt[tabidx].computePS(k);
+            avps(tabidx) = glmb_predict_tt[tabidx].mR; // change to this for LMB
         }
         VectorXd avqs = (1 - avps.array()).log();
         avps = avps.array().log();
@@ -388,7 +389,6 @@ private:
             VectorXd edcost = avqs(tindices).array().exp(); // death cost
             vector<MatrixXi> uasses = gibbs_multisensor_approx_dprobsample(edcost, costc, hypoth_num[pidx]);
             // vector<MatrixXi> uasses = multisensor_lapjv(costc); // single hypothesis
-
             MatrixXd local_avpdm = avpd;
             MatrixXd local_avqdm = avqd;
             MatrixXi aug_idx(tindices.size(), model.N_sensors + 1);
@@ -434,7 +434,7 @@ private:
                 int num_trk = (update_hypcmp_idx.array() >= 0).cast<int>().sum();
                 //
                 glmb_nextupdate_w(runidx) = stemp + glmb_update_w(pidx); // hypothesis/component weight
-
+                
                 if (num_trk > 0) {
                     // hypothesis/component tracks (via indices to track table)
                     int parent_size = tt_update_parent.size();
@@ -1121,6 +1121,113 @@ private:
         }
     }
 
+    void glmb2lmb(Filter filter) {
+        // convert GLMB to LMB
+        // --- collect all existence probability
+        vector<double> all_R(glmb_update_tt.size(),0) ; 
+        for (int hidx = 0; hidx < glmb_update_w.size(); hidx++) {
+            VectorXi glmb_I = glmb_update_I[hidx];
+            for (int idx = 0; idx < glmb_I.size(); idx++) {
+                int index = glmb_I[idx];
+                all_R[index] = all_R[index] + exp(glmb_update_w[hidx]);
+                if (isnan(exp(glmb_update_w[hidx]))) {
+                  cout << "found NaN: " << glmb_update_w[hidx]  << endl;  
+                }
+            }
+        }
+
+        // --- collect all labels 
+        vector<int> all_L(glmb_update_tt.size());
+        for (int ttidx = 0; ttidx < glmb_update_tt.size(); ttidx++) {
+            all_L[ttidx] = glmb_update_tt[ttidx].mL ; 
+        }
+
+        // --- select unique labels
+        vector<int> unique_labels ;  
+        for (int i = 0; i < all_L.size(); i++) {
+            bool found = false ; 
+            for (int j = 0; j < unique_labels.size(); j++) {
+                if (all_L[i] == unique_labels[j]) {
+                    found = true ;
+                    break ; 
+                }
+            }
+            if (!found) {
+                unique_labels.push_back(all_L[i]) ; 
+            }
+        }
+
+        // sum up the existence probabilities for each unique label
+        vector<double> unique_R ;
+        for (int lidx = 0; lidx < unique_labels.size(); lidx++) {
+            int label = unique_labels[lidx] ; 
+            double R = 0 ; 
+            for (int i = 0; i < all_L.size(); i++) {
+                if (all_L[i] == label) {
+                    R = R + all_R[i] ; 
+                }
+            }
+            unique_R.push_back(R) ; 
+        }
+
+        // prune track tables
+        vector<int> pruned_labels ;
+        vector<double> pruned_R ;
+        for (int i = 0; i < unique_R.size(); i++) {
+            if (unique_R[i] > filter.tt_prune) {
+                pruned_labels.push_back(unique_labels[i]) ; 
+                pruned_R.push_back(unique_R[i]) ;
+            }
+        }
+
+        // Sort sort_idx based on the values in pruned_R and capp the number of track tables
+        vector<int> sort_idx(pruned_R.size());
+        iota(sort_idx.begin(), sort_idx.end(), 0); // Requires #include <numeric>
+        sort(sort_idx.begin(), sort_idx.end(),
+            [&pruned_R](int i1, int i2) { return pruned_R[i1] < pruned_R[i2]; });
+        int max_tt_num = std::min(filter.tt_cap, static_cast<int>(pruned_labels.size()));
+        vector<int> pruned_capped_labels(max_tt_num);
+        vector<double> pruned_capped_R(max_tt_num);
+        for (int i = 0; i < max_tt_num; i++) {
+            pruned_capped_labels[i] = pruned_labels[sort_idx[i]];
+            pruned_capped_R[i] = pruned_R[sort_idx[i]];
+            if (pruned_capped_R[i]<0.001) {
+                pruned_capped_R[i] = 0.001 ; 
+            }
+            else if (pruned_capped_R[i]>0.999) {
+                pruned_capped_R[i] = 0.999 ; 
+            }
+        }
+
+        // --- create track tables from pruned and capped labels (just pick the best track table)
+        vector<Target> glmb_update_tt_out;
+        for (int lidx = 0; lidx < pruned_capped_labels.size(); lidx++) {
+            int label = pruned_capped_labels[lidx];
+            double best_R = 0;
+            Target this_tt;
+            for (int i = 0; i < all_L.size(); i++) {
+                if (all_L[i] == label && all_R[i] > best_R) {
+                    best_R = all_R[i];
+                    this_tt = glmb_update_tt[i] ; 
+                }
+            }
+            this_tt.mR = pruned_capped_R[lidx];
+            glmb_update_tt_out.push_back(this_tt); // Add this_tt to glmb_update_tt after updating it
+        }
+
+        VectorXd glmb_update_w_out = VectorXd::Zero(1) ; 
+        vector<VectorXi> glmb_update_I_out; 
+        glmb_update_I_out.push_back(VectorXi::LinSpaced(glmb_update_tt_out.size(), 0, glmb_update_tt_out.size()-1)) ;
+        VectorXi glmb_update_n_out = VectorXi::Zero(1) ;
+        glmb_update_n_out(0) = glmb_update_tt_out.size() ;
+
+        // --- convert original GLMB to a single-hypothesis GLMB
+        glmb_update_tt = glmb_update_tt_out ; 
+        glmb_update_w = glmb_update_w_out ; 
+        glmb_update_I = glmb_update_I_out ;  
+        glmb_update_n = glmb_update_n_out ; 
+    }
+
     std::tuple<MatrixXd, int, MatrixXi, vector<int>> extract_estimates(Model model) {
         // extract estimates via best cardinality, then
         // best component/hypothesis given best cardinality, then
@@ -1135,6 +1242,61 @@ private:
         for (int n = 0; n < N; n++) {
             int idxptr = glmb_update_I[idxcmp](n);
             Target tt = glmb_update_tt[idxptr];
+            int ind;
+            tt.mMode.maxCoeff(&ind);
+            int start = tt.mGmLen(seq(0, ind - 1)).sum();
+            int end = start + tt.mGmLen[ind];
+            int indx;
+            tt.mW(seq(start, end - 1)).maxCoeff(&indx);
+            X.col(n) = tt.mM.col(start + indx);
+            L.col(n) << tt.mBirthTime, tt.mL;
+            S[n] = ind; // model.mode_type[ind];
+        }
+        // return {X, N, L, S};
+        return std::make_tuple(X, N, L, S);
+    }
+
+    std::tuple<MatrixXd, int, MatrixXi, vector<int>> extract_estimates_LMB(Model model) {
+        // extract estimates via best cardinality, then
+        // best component/hypothesis given best cardinality, then
+        // best means of tracks given best component/hypothesis and cardinality
+
+        // grab the existence probability of each track table
+        vector<double> all_R(glmb_update_tt.size(),0) ; 
+        vector<double> all_R_bar(glmb_update_tt.size(),0) ; 
+        double prod_rvect_com = 1 ; 
+        for (int ttidx = 0; ttidx < glmb_update_tt.size(); ttidx++) {
+            all_R[ttidx] = glmb_update_tt[ttidx].mR ;
+            if (all_R[ttidx] < 0.001) {
+                all_R[ttidx] = 0.001 ; 
+            }
+            else if (all_R[ttidx] > 0.999) {
+                all_R[ttidx] = 0.999 ; 
+            }
+            all_R_bar[ttidx] = all_R[ttidx] / (1 - all_R[ttidx]) ;
+            prod_rvect_com = prod_rvect_com * (1-all_R[ttidx]) ;
+        }
+
+        // sort the existence probabilities
+        vector<int> sort_idx(all_R.size());
+        iota(sort_idx.begin(), sort_idx.end(), 0); // Requires #include <numeric>
+        sort(sort_idx.begin(), sort_idx.end(),
+            [&all_R](int i1, int i2) { return all_R[i1] < all_R[i2]; });
+
+        vector<double> cdn = esf(all_R_bar) ; 
+        for (auto& element : cdn) {
+            element *= prod_rvect_com;
+        }
+
+        auto maxIt = std::max_element(cdn.begin(), cdn.end());
+        size_t maxIndex = std::distance(cdn.begin(), maxIt);
+        int N = static_cast<int>(maxIndex);
+        MatrixXd X(model.x_dim, N);
+        MatrixXi L(2, N);
+        vector<int> S(N);
+        for (int n = 0; n < N; n++) {
+            int ttidx = sort_idx[n];
+            Target tt = glmb_update_tt[ttidx];
             int ind;
             tt.mMode.maxCoeff(&ind);
             int start = tt.mGmLen(seq(0, ind - 1)).sum();
@@ -1177,29 +1339,22 @@ public:
     }
 
     std::tuple<MatrixXd, int, MatrixXi, vector<int>> run_msglmb_ukf(vector<MatrixXd> measZ, int kt) {
-
         msjointpredictupdate(mModel, filter, measZ, kt);
         int H_posterior = glmb_update_w.size();
-
-        // pruning and truncation
-        prune(filter);
-        int H_prune = glmb_update_w.size();
-        cap(filter);
-        int H_cap = glmb_update_w.size();
         clean_update(kt);
-
         VectorXd rangetmp = VectorXd::LinSpaced(glmb_update_cdn.size(), 0, glmb_update_cdn.size() - 1);
         // cout << "Time " << kt << " #eap cdn=" << rangetmp.transpose() * glmb_update_cdn;
         int temp1 = ((VectorXd) rangetmp.array().pow(2)).transpose() * glmb_update_cdn;
         int temp2 = (rangetmp.transpose() * glmb_update_cdn);
         // cout << " #var cdn=" << temp1 - temp2 * temp2;
-        // cout << " #comp pred=" << H_posterior;
-        // cout << " #comp post=" << H_posterior;
-        // cout << " #comp updt=" << H_cap;
-        // cout << " #trax updt=" << glmb_update_tt.size() << endl;
-
-        // state estimation and display diagnostics
-        return extract_estimates(mModel);
+        // cout << " #H_posterior=" << H_posterior ;
+        // cout << " #trax updt=" << glmb_update_tt.size() ;
+        glmb2lmb(filter); // add this for LMB
+        // cout << " #LMB trax updt=" << glmb_update_tt.size() ; 
+        tuple<MatrixXd, int, MatrixXi, vector<int>> est = extract_estimates_LMB(mModel);
+        int est_N = std::get<1>(est);
+        // cout << " #est_cdn=" << est_N << endl ; 
+        return est;
     }
 };
 

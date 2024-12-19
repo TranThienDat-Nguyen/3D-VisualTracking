@@ -27,7 +27,8 @@ public:
     double ukf_kappa;
 
     Filter() {
-        H_upd = 20000;  // requested number of updated components/hypotheses
+        // H_upd = 20000;  // requested number of updated components/hypotheses
+        H_upd = 5000;
         H_max = 8000; // cap on number of posterior components/hypotheses
         hyp_threshold = log(1e-5);  // pruning threshold for components/hypotheses
 
@@ -47,6 +48,8 @@ public:
         // scale parameter for UKF (alpha=1 preferred for stability, giving lambda=1, offset of beta
         // for first cov weight)
         ukf_kappa = 2;
+        tt_prune = 1e-3 ;
+        tt_cap = 100 ;
     }
 };
 
