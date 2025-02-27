@@ -119,5 +119,7 @@ The OSPA(2) metric used for evaluation is described in the paper:
   pages={8538-8552}
 }
 ```
-The LMB filtering work is supported by Australia-Korea Foundation.
-![akf-logo-colour](https://github.com/user-attachments/assets/81e3646e-4015-4b44-a904-894cd563482b)
+The work on LMB filter is supported by the Australia-Korea Foundation.
+
+<img src="https://github.com/user-attachments/assets/81e3646e-4015-4b44-a904-894cd563482b" alt="Alt Text" style="width:30%; height:auto;">
+
