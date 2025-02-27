@@ -111,6 +111,7 @@ The OSPA(2) metric used for evaluation is described in the paper:
 @article{rezatofighi2020trustworthy,
   title={How trustworthy are the existing performance evaluations for basic vision tasks?},
   author={Tran Thien Dat Nguyen and Hamid Rezatofighi and Ba-Ngu Vo and Ba-Tuong Vo and Silvio Savarese and Ian Reid},
+
   journal={IEEE Transactions on Pattern Analysis and Machine Intelligence},
   year={2023},
   volume={45},
@@ -118,4 +119,5 @@ The OSPA(2) metric used for evaluation is described in the paper:
   pages={8538-8552}
 }
 ```
-
+The LMB filtering work is supported by Australia-Korea Foundation.
+![akf-logo-colour](https://github.com/user-attachments/assets/81e3646e-4015-4b44-a904-894cd563482b)
